@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ProductInventory.Domain;
+using ProductInventory.Domain.Providers;
 using ProductInventory.Domain.Services;
 
 namespace ProductInventory.Api
@@ -32,6 +33,7 @@ namespace ProductInventory.Api
             services.AddTransient<GetSortedProductQueryHandler>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IShopperHistoryService, ShopperHistoryService>();
+            services.AddTransient<RecommendationProvider>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

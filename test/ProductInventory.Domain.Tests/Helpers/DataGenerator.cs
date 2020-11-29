@@ -5,11 +5,11 @@ namespace ProductInventory.Domain.Tests.Helpers
 {
     public static class DataGenerator
     {
-        private static Product productA = new Product("WooliesX Product A", 99.99, 0);
-        private static Product productB = new Product("WooliesX Product B", 101.99, 0);
-        private static Product productC = new Product("WooliesX Product C", 16.59, 0);
-        private static Product productD = new Product("WooliesX Product D", 5, 0);
-        private static Product productF = new Product("WooliesX Product F", 999999999999, 0);
+        private static readonly Product productA = new Product("WooliesX Product A", 99.99, 0);
+        private static readonly Product productB = new Product("WooliesX Product B", 101.99, 0);
+        private static readonly Product productC = new Product("WooliesX Product C", 16.59, 0);
+        private static readonly Product productD = new Product("WooliesX Product D", 5, 0);
+        private static readonly Product productF = new Product("WooliesX Product F", 999999999999, 0);
         
         
         public static readonly List<Product> NotSortedProductsFormLowToHigh = new List<Product>
@@ -18,7 +18,7 @@ namespace ProductInventory.Domain.Tests.Helpers
             productA,
             productC,
             productD,
-            productF,
+            productF
         };
 
 
@@ -29,7 +29,7 @@ namespace ProductInventory.Domain.Tests.Helpers
             productC,
             productA,
             productB,
-            productF,
+            productF
         };
 
         public static readonly List<Product> SortedProductsFormHighToLow = new List<Product>
@@ -38,7 +38,7 @@ namespace ProductInventory.Domain.Tests.Helpers
             productB,
             productA,
             productC,
-            productD,
+            productD
         };
 
         public static readonly List<Product> SortedProductsAscending = new List<Product>
@@ -47,7 +47,7 @@ namespace ProductInventory.Domain.Tests.Helpers
             productB,
             productC,
             productD,
-            productF,
+            productF
         };
 
         public static readonly List<Product> SortedProductsDescending = new List<Product>
@@ -56,16 +56,16 @@ namespace ProductInventory.Domain.Tests.Helpers
             productD,
             productC,
             productB,
-            productA,
+            productA
         };
         
         public static readonly List<Product> SortedProductsBasedOnRecommended = new List<Product>
         {
-            productA,
             productB,
-            productF,
+            productA,
             productC,
             productD,
+            productF
         };
     }
 }
