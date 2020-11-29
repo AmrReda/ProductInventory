@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ProductInventory.Domain;
 using ProductInventory.Domain.Providers;
+using ProductInventory.Domain.Queries.CalculateTrolley;
 using ProductInventory.Domain.Queries.GetSortedProduct;
 using ProductInventory.Domain.Services;
 
@@ -32,6 +33,7 @@ namespace ProductInventory.Api
         {
             services.AddControllers();
             services.AddTransient<GetSortedProductQueryHandler>();
+            services.AddTransient<CalculateTrolleyQueryHandler>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IShopperHistoryService, ShopperHistoryService>();
             services.AddTransient<RecommendationProvider>();
