@@ -23,7 +23,7 @@ namespace ProductInventory.Domain.Models
         public string Name { get; set; }
         [JsonProperty] 
         public double Price { get; set; }
-        [JsonProperty] 
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public double Quantity { get; set; }
     }
 }

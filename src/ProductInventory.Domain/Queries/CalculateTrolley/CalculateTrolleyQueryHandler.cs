@@ -83,14 +83,7 @@ namespace ProductInventory.Domain.Queries.CalculateTrolley
         private static bool DoesPortionOfSpecialApply(List<Quantity> quantitiesPurchased, Quantity quantity)
         {
             var foundPurchasedProduct = quantitiesPurchased.SingleOrDefault(product => product.Name == quantity.Name);
-            if (foundPurchasedProduct == null) return false;
-
-            if (foundPurchasedProduct.Value < quantity.Value)
-            {
-                return false;
-            }
-
-            return true;
+            return foundPurchasedProduct != null && !(foundPurchasedProduct.Value < quantity.Value);
         }
 
     }
