@@ -32,11 +32,12 @@ namespace ProductInventory.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddTransient<GetSortedProductQueryHandler>();
-            services.AddTransient<CalculateTrolleyQueryHandler>();
+            
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IShopperHistoryService, ShopperHistoryService>();
             services.AddTransient<RecommendationProvider>();
+            services.AddTransient<GetSortedProductQueryHandler>();
+            services.AddTransient<CalculateTrolleyQueryHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

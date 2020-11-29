@@ -20,10 +20,10 @@ namespace ProductInventory.Domain.Models
         }
         
         [JsonProperty] 
-        public string Name { get; }
+        public string Name { get; set; }
         [JsonProperty] 
-        public double Price { get; }
+        public double Price { get; set; }
         [JsonProperty] 
-        public double Quantity { get; }
+        public double Quantity { get; set; }
     }
 }
