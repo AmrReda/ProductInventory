@@ -1,0 +1,105 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using FluentAssertions;
+using Moq;
+using NUnit.Framework;
+using ProductInventory.Domain.Models;
+using ProductInventory.Domain.Services;
+using ProductInventory.Domain.Tests.Helpers;
+
+namespace ProductInventory.Domain.Tests
+{
+    public class GetSortedProductQueryHandlerTests
+    {
+        private Mock<IProductService> _mockProductService;
+        private GetSortedProductQueryHandler _getSortedProductQueryHandler;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mockProductService = new Mock<IProductService>();
+            _getSortedProductQueryHandler = new GetSortedProductQueryHandler(
+                _mockProductService.Object);
+        }
+
+
+        [Test]
+        public async Task Handle_ShouldReturnEmptyListOfProducts_WhenSortOptionsEqualLowAndProductListIsEmpty()
+        {
+            // Arrange
+            var getSortedProductQuery = new GetSortedProductQuery("Low");
+            _mockProductService.Setup(ps => ps.GetProducts())
+                .ReturnsAsync(new List<Product>());
+
+            // Act
+            var getSortedProductQueryResponse = await _getSortedProductQueryHandler.Handle(getSortedProductQuery);
+
+            // Assert
+            getSortedProductQueryResponse.Products.Should().BeEmpty();
+        }
+
+
+        [Test]
+        public async Task Handle_ShouldReturnSortedFromLowToHigh_WhenSortOptionsEqualLowAndProductListIsNotEmpty()
+        {
+            // Arrange
+            var getSortedProductQuery = new GetSortedProductQuery("Low");
+            var getSortedProductQueryHandler = new GetSortedProductQueryHandler(
+                _mockProductService.Object);
+            _mockProductService.Setup(ps => ps.GetProducts())
+                .ReturnsAsync(DataGenerator.NotSortedProductsFormLowToHigh);
+
+            // Act
+            var getSortedProductQueryResponse = await getSortedProductQueryHandler.Handle(getSortedProductQuery);
+
+            // Assert
+            getSortedProductQueryResponse.Products.Should().Equal(DataGenerator.SortedProductsFormLowToHigh);
+        }
+
+
+        [Test]
+        public async Task Handle_ShouldReturnSortedFromHighToLow_WhenSortOptionsEqualHighAndProductListIsNotEmpty()
+        {
+            // Arrange
+            var getSortedProductQuery = new GetSortedProductQuery("High");
+            _mockProductService.Setup(ps => ps.GetProducts())
+                .ReturnsAsync(DataGenerator.NotSortedProductsFormLowToHigh);
+
+            // Act
+            var getSortedProductQueryResponse = await _getSortedProductQueryHandler.Handle(getSortedProductQuery);
+
+            // Assert
+            getSortedProductQueryResponse.Products.Should().Equal(DataGenerator.SortedProductsFormHighToLow);
+        }
+
+        [Test]
+        public async Task Handle_ShouldReturnSortedAscending_WhenSortOptionsEqualAscendingAndProductListIsNotEmpty()
+        {
+            // Arrange
+            var getSortedProductQuery = new GetSortedProductQuery("Ascending");
+            _mockProductService.Setup(ps => ps.GetProducts())
+                .ReturnsAsync(DataGenerator.NotSortedProductsFormLowToHigh);
+
+            // Act
+            var getSortedProductQueryResponse = await _getSortedProductQueryHandler.Handle(getSortedProductQuery);
+
+            // Assert
+            getSortedProductQueryResponse.Products.Should().Equal(DataGenerator.SortedProductsAscending);
+        }
+
+        [Test]
+        public async Task Handle_ShouldReturnSortedDescending_WhenSortOptionsEqualAscendingAndProductListIsNotEmpty()
+        {
+            // Arrange
+            var getSortedProductQuery = new GetSortedProductQuery("Descending");
+            _mockProductService.Setup(ps => ps.GetProducts())
+                .ReturnsAsync(DataGenerator.NotSortedProductsFormLowToHigh);
+
+            // Act
+            var getSortedProductQueryResponse = await _getSortedProductQueryHandler.Handle(getSortedProductQuery);
+
+            // Assert
+            getSortedProductQueryResponse.Products.Should().Equal(DataGenerator.SortedProductsDescending);
+        }
+    }
+}
