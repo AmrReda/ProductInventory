@@ -63,10 +63,8 @@ namespace ProductInventory.Domain.Queries.CalculateTrolley
         {
             var totalSpecial = appliedSpecials.Sum(special => special.Total);
             var totalRemainingTotal = quantitiesPurchased.Sum(quantityPurchased =>
-            {
-                return productsCatalog.Single(product => product.Name == quantityPurchased.Name).Price *
-                       quantityPurchased.Value;
-            });
+            productsCatalog.Single(product => product.Name == quantityPurchased.Name).Price *
+                       quantityPurchased.Value);
 
             return totalSpecial + totalRemainingTotal;
         }
