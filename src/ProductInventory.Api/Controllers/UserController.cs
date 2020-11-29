@@ -3,10 +3,10 @@ using ProductInventory.Api.ViewModels;
 
 namespace ProductInventory.Api.Controllers
 {
-    [Route("user")]
+    [Route("answers")]
     public class UserController : ControllerBase
     {
-        [HttpGet]
+        [HttpGet("user")]
         [ProducesResponseType(typeof(UserResponse), 200)]
         public IActionResult FindUser()
         {
