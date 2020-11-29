@@ -5,10 +5,11 @@ using Moq;
 using NUnit.Framework;
 using ProductInventory.Domain.Models;
 using ProductInventory.Domain.Providers;
+using ProductInventory.Domain.Queries.GetSortedProduct;
 using ProductInventory.Domain.Services;
 using ProductInventory.Domain.Tests.Helpers;
 
-namespace ProductInventory.Domain.Tests
+namespace ProductInventory.Domain.Tests.Queries
 {
     public class GetSortedProductQueryHandlerTests
     {

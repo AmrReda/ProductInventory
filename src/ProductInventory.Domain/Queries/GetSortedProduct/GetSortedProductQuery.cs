@@ -1,4 +1,4 @@
-namespace ProductInventory.Domain
+namespace ProductInventory.Domain.Queries.GetSortedProduct
 {
     public class GetSortedProductQuery
     {

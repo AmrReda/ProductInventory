@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProductInventory.Domain;
 using ProductInventory.Domain.Models;
+using ProductInventory.Domain.Queries.GetSortedProduct;
 
 namespace ProductInventory.Api.Controllers
 {

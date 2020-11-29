@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ProductInventory.Domain;
 using ProductInventory.Domain.Providers;
+using ProductInventory.Domain.Queries.GetSortedProduct;
 using ProductInventory.Domain.Services;
 
 namespace ProductInventory.Api

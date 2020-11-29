@@ -10,7 +10,7 @@ namespace ProductInventory.Domain.Models
                 Products = products;
             }
 
-            public string CustomerId { get; private set; }
-            public List<Product> Products { get; private set; }
+            public string CustomerId { get; }
+            public List<Product> Products { get; }
     }
 }

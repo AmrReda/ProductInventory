@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using ProductInventory.Domain.Providers;
 using ProductInventory.Domain.Services;
 
-namespace ProductInventory.Domain
+namespace ProductInventory.Domain.Queries.GetSortedProduct
 {
     public class GetSortedProductQueryHandler
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using ProductInventory.Domain.Models;
 
-namespace ProductInventory.Domain
+namespace ProductInventory.Domain.Queries.GetSortedProduct
 {
     public class GetSortedProductQueryResponse
     {
