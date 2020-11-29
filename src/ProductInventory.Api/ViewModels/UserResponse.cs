@@ -16,7 +16,7 @@ namespace ProductInventory.Api.ViewModels
         {
             return new UserResponse()
             {
-                Name = "Amr Reda",
+                Name = "Amr Kamel",
                 Token = "108337a6-dbcd-4231-92d4-d4962fc43b71"
             };
         }
