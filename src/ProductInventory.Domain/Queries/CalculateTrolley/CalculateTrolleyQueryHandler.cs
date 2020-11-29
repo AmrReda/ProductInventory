@@ -18,31 +18,28 @@ namespace ProductInventory.Domain.Queries.CalculateTrolley
         private static void ValidateQueryParameters(CalculateTrolleyQuery query)
         {
             if(query.Products == null || query.Quantities == null || query.Specials == null)
-                throw new ArgumentNullException();
+                throw new ArgumentNullException(nameof(query));
             
             if (query.Quantities.GroupBy(quantity => quantity.Name).Any(grouping => grouping.Count() > 1))
                 throw new ArgumentException("Duplicate purchased product name not allowed.");
         }
 
         private static (List<Special> appliedSpecials, List<Quantity> quantitiesPurchased) UpdateQuantitiesWithSpecials(
-            List<Special> specialsToApply, 
-            List<Quantity> quantitiesPurchased
-            )
+            List<Special> specialsToApply, List<Quantity> quantitiesPurchased)
         {
             var appliedSpecials = new List<Special>();
-            var specialApplied = true;
-            
-            specialsToApply.ForEach(special =>
+            foreach (var special in specialsToApply)
             {
+                var specialApplied = true;
                 do
                 {
-                    special.Quantities.ForEach(portionQuantityFromSpecial =>
+                    foreach (var portionQuantityFromSpecial in special.Quantities)
                     {
                         if (!DoesPortionOfSpecialApply(quantitiesPurchased, portionQuantityFromSpecial))
                         {
                             specialApplied = false;
                         }
-                    });
+                    }
 
                     if (specialApplied)
                     {
@@ -50,22 +47,17 @@ namespace ProductInventory.Domain.Queries.CalculateTrolley
                         ReducePurchasedQuantitiesBySpecialQuantities(quantitiesPurchased, special);
                     }
                 } while (specialApplied);
-            });
+            }
 
             return (appliedSpecials, quantitiesPurchased);
         }
 
-        private static double SumTotalPrice(
-            IEnumerable<Product> productsCatalog,
-            IEnumerable<Special> appliedSpecials,
-            IEnumerable<Quantity> quantitiesPurchased
-        )
+        private static double SumTotalPrice(List<Product> productsCatalog, List<Special> appliedSpecials, List<Quantity> quantitiesPurchased)
         {
             var totalSpecial = appliedSpecials.Sum(special => special.Total);
             var totalRemainingTotal = quantitiesPurchased.Sum(quantityPurchased =>
             {
-                return productsCatalog.Single(product => product.Name == quantityPurchased.Name).Price *
-                       quantityPurchased.Value;
+                return productsCatalog.Single(product => product.Name == quantityPurchased.Name).Price * quantityPurchased.Value;
             });
 
             return totalSpecial + totalRemainingTotal;
